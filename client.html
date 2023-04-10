@@ -77,7 +77,10 @@
                 if (errorArr.length === 0) {
                     validationHeader.textContent = 'Signed Up Successfully!'
                     validationHeader.classList.add('color')
-                    submittedData.textContent = JSON.stringify(state)
+                    submittedData.textContent = JSON.stringify({
+                        name: state.name,
+                        email: state.email
+                    })
                     return
                 }
                 errorArr.forEach((val, i) => {
@@ -85,8 +88,6 @@
                     listItem.textContent = val
                     validationContainer.append(listItem)
                 })
-                submittedData.textContent = JSON.stringify(state)
-
             }
         };
 
