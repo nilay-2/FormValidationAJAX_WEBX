@@ -1,0 +1,38 @@
+.input-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container input {
+  padding: 5px 10px;
+}
+
+.input-container label {
+  margin-bottom: 4px;
+}
+
+.container {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.validationErrors {
+  background-color: #f1f1f1;
+  padding: 5px;
+  height: auto;
+  width: 200px;
+  border: 1px solid #f1f1f1;
+}
+
+.validation-header {
+  color: red;
+}
+
+li {
+  margin-bottom: 10px;
+}

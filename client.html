@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+
+            <form action="">
+                <h1>Sign Up Form</h1>
+                <div class="input-container">
+                    <label for="">Name</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="input-container">
+                    <label for="">Email</label>
+                    <input type="text" id="email">
+                </div>
+                <div class="input-container">
+                    <label for="">Password</label>
+                    <input type="password" id="password">
+                </div>
+                <div class="input-container">
+                    <label for="">Confirm password</label>
+                    <input type="password" id="confirmPassword">
+                </div>
+                <div class="input-container">
+                    <input type="submit" id="submit">
+                </div>
+            </form>
+        </div>
+        <div>
+            <h3 class="validation-header">Validation Errors</h3>
+            <ul class="validationErrors"></ul>
+        </div>
+    </div>
+</body>
+<script>
+    const name = document.querySelector('#name')
+    const email = document.querySelector('#email')
+    const password = document.querySelector('#password')
+    const confirmPassword = document.querySelector('#confirmPassword')
+    const form = document.querySelector('form')
+    const validationContainer = document.querySelector('.validationErrors')
+    const state = {
+        name: null,
+        email: null,
+        password: null,
+        confirmPassword: null
+    }
+
+    const sendRequest = (state) => {
+        validationContainer.innerHTML = ''
+        const xhr = new XMLHttpRequest();
+        const url = "http://localhost:5000/signUp";
+        const data = JSON.stringify(state);
+
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                const errorArr = Object.values(response.response)
+                console.log(errorArr)
+                errorArr.forEach((val, i) => {
+                    const listItem = document.createElement('li')
+                    listItem.textContent = val
+                    validationContainer.append(listItem)
+                })
+            }
+        };
+
+        xhr.send(data);
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        state['name'] = name.value
+        state['email'] = email.value
+        state['password'] = password.value
+        state['confirmPassword'] = confirmPassword.value
+        sendRequest(state)
+    })
+</script>
+
+</html>
