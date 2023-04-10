@@ -22,7 +22,7 @@ const validate = (data) => {
 
 // API to post data from the client to the server
 app.post("/signUp", (req, res, next) => {
-  const response = validate(req.body);
+  let response = validate(req.body);
   console.log(response);
   res.status(200).json({
     status: "success",

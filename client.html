@@ -49,6 +49,7 @@
     const confirmPassword = document.querySelector('#confirmPassword')
     const form = document.querySelector('form')
     const validationContainer = document.querySelector('.validationErrors')
+    const validationHeader = document.querySelector('.validation-header')
     const state = {
         name: null,
         email: null,
@@ -71,6 +72,11 @@
                 console.log(response)
                 const errorArr = Object.values(response.response)
                 console.log(errorArr)
+                if (errorArr.length === 0) {
+                    validationHeader.textContent = 'Signed Up Successfully!'
+                    validationHeader.classList.add('color')
+                    return
+                }
                 errorArr.forEach((val, i) => {
                     const listItem = document.createElement('li')
                     listItem.textContent = val
