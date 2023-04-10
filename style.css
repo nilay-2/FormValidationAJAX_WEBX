@@ -40,3 +40,7 @@ li {
 .color {
   color: green;
 }
+
+.submittedData {
+  width: 200px;
+}
